@@ -1,0 +1,10 @@
+{
+    "files": {
+        "id": "int primary key NOT NULL AUTO_INCREMENT",
+        "pid": "int",
+        "filename": "varchar(255)",
+        "path": "varchar(255)",
+        "size": "bigint",
+        "createTime": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP"
+    }
+}

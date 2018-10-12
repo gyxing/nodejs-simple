@@ -1,0 +1,13 @@
+# build output
+dist
+.idea
+
+# dependencies
+node_modules
+package-lock.json
+
+# logs
+*.log
+
+uploads
+apidoc

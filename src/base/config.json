@@ -1,0 +1,10 @@
+{
+    "mysql": {
+        "host": "localhost",
+        "user": "root",
+        "password": "root",
+        "database": "my_example"
+    },
+    "defaultPageSize": 10,
+    "defaultSort": "-createTime"
+}

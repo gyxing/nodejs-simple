@@ -1,2 +1,3 @@
-# nodejs-simple
-nodejs简易后台服务模板
+## 后台接口
+
+技术架构： nodejs + express + mysql
