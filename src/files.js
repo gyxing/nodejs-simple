@@ -10,8 +10,8 @@ const FileService = require('./service/files');
 const utils = require('./utils');
 
 // 自动创建文件夹。
-let baseSavePath = '../static/uploads';
-let savePaths = ['', '/cover', '/avatar'];
+let baseSavePath = '../static/uploads'; // 保存文件的文件夹
+let savePaths = ['', '/image']; // 细分目录
 for(let item of savePaths) {
     let url = path.resolve(__dirname, baseSavePath + item);
     try{
@@ -47,31 +47,12 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 /**
- * 上传封面图片
- * @api {POST} /file/upload/ 上传封面图片
- * @apiDescription 以form表单方式上传, 单文件上传
- * @apiName upload
- * @apiSampleRequest off
- * @apiGroup file
- * @apiSuccessExample {json} 上传成功返回:
- *     {
- *       "code": 0,
- *       "msg": "success",
- *       "data": "http://www.xxx.com/files/123.png"
- *     }
- * @apiVersion 1.0.0
- */
-app.post('/upload', uploadMulter['cover'].single('file'), (req, res) => {
-    FileService.uploadCover(req, res)
-});
-
-/**
  * 多文件上传
- * @api {POST} /file/upload/:albumId 多文件上传，相册图片
+ * @api {POST} /files/upload/:pid 多文件上传，相册图片
  * @apiDescription 以form表单方式上传, 多文件上传
  * @apiName upload
  * @apiSampleRequest off
- * @apiGroup file
+ * @apiGroup files
  * @apiSuccessExample {json} 上传成功返回:
  *     {
  *       "code": 0,
@@ -80,18 +61,18 @@ app.post('/upload', uploadMulter['cover'].single('file'), (req, res) => {
  *     }
  * @apiVersion 1.0.0
  */
-app.post('/upload/:albumId', uploadMulter.avatar.array('files'), (req, res) => {
-    FileService.uploadAlbum(req, res, req.params.albumId)
+app.post('/upload/:pid', uploadMulter.image.array('files'), (req, res) => {
+    FileService.upload(req, res, req.params.pid)
 });
 
 /**
  * 批量删除
- * @api {DELETE} /file/batch 批量删除
+ * @api {DELETE} /files/batch 批量删除
  * @apiDescription 批量删除类目
  * @apiName remove_batch
  * @apiParam {Array} ids body，类目ID集合
- * @apiSampleRequest /file/batch
- * @apiGroup file
+ * @apiSampleRequest /files/batch
+ * @apiGroup files
  * @apiVersion 1.0.0
  */
 app.delete('/batch', (req, res) => {
@@ -100,11 +81,11 @@ app.delete('/batch', (req, res) => {
 
 /**
  * 日志文件
- * @api {GET} /file/logs 日志文件
+ * @api {GET} /files/logs 日志文件
  * @apiDescription 查看日志文件
  * @apiName get_logs
- * @apiSampleRequest /file/logs
- * @apiGroup file
+ * @apiSampleRequest /files/logs
+ * @apiGroup files
  * @apiVersion 1.0.0
  */
 app.get('/logs', (req, res) => {

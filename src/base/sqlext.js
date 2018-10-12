@@ -8,6 +8,7 @@ const config = require('./config.json');
 class SqlExt {
 
     constructor(props) {
+        // 初始配置数据库连接池
         this.mysqlPool = mysql.createPool({
             host     : config.mysql.host,
             user     : config.mysql.user,
@@ -20,6 +21,7 @@ class SqlExt {
     }
 
     init() {
+        // 建表
         Object.keys(tables).map( key => {
             let arr = tables[key], sql, fields;
             fields = Object.keys(arr).map( field => `${field} ${arr[field]}`);
@@ -45,6 +47,7 @@ class SqlExt {
         }, 200)*/
     }
 
+    // 执行sql语句
     exec(sql, values) {
         return new Promise( (resolve, reject) => {
             this.mysqlPool.getConnection( (error, connection) => {

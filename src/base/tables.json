@@ -6,5 +6,10 @@
         "path": "varchar(255)",
         "size": "bigint",
         "createTime": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP"
+    },
+    "example": {
+        "id": "int primary key NOT NULL AUTO_INCREMENT",
+        "name": "varchar(255)",
+        "createTime": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP"
     }
 }

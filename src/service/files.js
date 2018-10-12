@@ -11,20 +11,7 @@ const FilesService = new class {
     constructor() {
         this.tb_name = 'files';
     }
-    uploadCover(req, res) {
-        let file = req.file;
-        if(file) {
-            let oc = req.body.oldCover;
-            if(oc) {
-                fs.unlink(`${staticDir}\\${oc}`, ()=>{});
-            }
-            let filePath = '/uploads/cover/' + file.filename;
-            res.send(Factory.responseSuccess(filePath))
-        } else {
-            res.send(Factory.responseError('没有文件'))
-        }
-    }
-    uploadAlbum(req, res, album_id) {
+    upload(req, res, pid) {
         let files = req.files, urls = [];
         if(files.length > 0) {
             let list = [];
@@ -34,9 +21,9 @@ const FilesService = new class {
                     let {originalname, size, filename} = file;
                     let photo = {
                         filename: originalname,
-                        path: `/uploads/album/${filename}`,
+                        path: `/uploads/images/${filename}`,
                         size,
-                        album_id
+                        pid
                     };
                     Factory.add(this.tb_name, photo).then(({insertId}) => {
                         if(insertId) {
