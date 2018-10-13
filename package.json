@@ -1,14 +1,14 @@
 {
-    "name": "blog-server",
+    "name": "{{name}}",
     "version": "1.0.0",
-    "description": "blog server",
+    "description": "{{description}}",
     "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "nodemon index.js",
         "start": "node index.js",
-        "build": "webpack",
         "api": "apidoc -i ./src -o static/apidoc"
     },
-    "author": "",
+    "author": "{{author}}",
     "license": "ISC",
     "devDependencies": {
         "apidoc": "^0.17.6",
