@@ -1,6 +1,17 @@
 ## nodejs简易后台接口服务
 
 技术架构： nodejs + express + mysql
+
+#### 安装
+
+* 已加入npm脚手架，用npm安装
+```base
+npm i -g sumn-cli
+
+sumn init <ProjectName>
+```
+
+
 #### 辅助工具：
 
 * morgan: 请求接口，自动生成日志记录
