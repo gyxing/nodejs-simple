@@ -48,7 +48,7 @@ npm start       // 上线时，稳定运行
 
 ## 一些说明
 
-* 如要需要端口号，请在`./index.js`修改`port`变量值
+* 如需修改端口号，请在`./index.js`修改`port`变量值
 
 * api文档基本配置，请修改`./apidoc.json`的`url`和`sampleUrl`参数值（改为自己的后台服务地址），如 `http://localhost:8100/rest`
 
