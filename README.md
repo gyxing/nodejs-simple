@@ -6,9 +6,9 @@
 
 * 已加入npm脚手架，用npm安装
 ```base
-npm i -g sumn-cli
+npm i -g simn-cli
 
-sumn init <ProjectName>
+simn init <ProjectName>
 ```
 
 
