@@ -1,4 +1,4 @@
-## nodejs简易后台接口服务
+## Nodejs简易后台接口服务
 
 技术架构： nodejs + express + mysql
 
