@@ -38,7 +38,7 @@
 ## 执行命令说明：
 ```base
 npm install     // 安装依赖包
-npm run api     // 生成api接口说明
+npm run api     // 生成api接口说明，生成的文档在 ./static/apidoc 目录
 npm run dev     // 开发阶段
 npm start       // 上线时，稳定运行
 ```
