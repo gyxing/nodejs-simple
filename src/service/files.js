@@ -1,14 +1,16 @@
 const path = require('path');
 const fs = require('fs');
 const Factory = require('../base/factory');
+const BaseServiceSimple = require('../base/service-simple');
 
 const staticDir = path.resolve(__dirname, '../../static');
 
 /**
  * 文章类接口
  */
-const FilesService = new class {
+const FilesService = new class extends BaseServiceSimple {
     constructor() {
+        super();
         this.tb_name = 'files';
     }
     upload(req, res, pid) {
@@ -36,12 +38,12 @@ const FilesService = new class {
                         }
                     })
                 } else {
-                    res.send(Factory.responseSuccess(list))
+                    this.responseSuccess(res, list)
                 }
             }
             _loop(files)
         }else{
-            res.send(Factory.responseError('没有文件'))
+            this.responseError(res, '没有文件');
         }
     }
     async removeFiles(req, res, ids) {
@@ -52,9 +54,9 @@ const FilesService = new class {
                 fs.unlinkSync(path.resolve(`${staticDir}\\${file.path}`));    // 删除本地存储
                 await Factory.remove(this.tb_name, id);
             }
-            res.send(Factory.responseSuccess(ids, '删除成功'))
+            this.responseSuccess(res, ids, '删除成功')
         } catch (e) {
-            res.send(Factory.responseError('异常'))
+            this.responseError(res, '删除失败');
         }
     }
     // 删除本地文件
@@ -87,9 +89,9 @@ const FilesService = new class {
                     })
                 }
             }
-            res.send(Factory.responseSuccess(arr))
+            this.responseSuccess(res, arr);
         }catch(e) {
-            res.send(Factory.responseError('异常'))
+            this.responseError(res, '找不到日志文件', 400);
         }
     }
 };

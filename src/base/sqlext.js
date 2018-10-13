@@ -51,6 +51,8 @@ class SqlExt {
     exec(sql, values) {
         return new Promise( (resolve, reject) => {
             this.mysqlPool.getConnection( (error, connection) => {
+                if(error) throw error;
+
                 connection.query(sql, values, function(err, results) {
                     if(err) {
                         reject({status:500, msg: err})

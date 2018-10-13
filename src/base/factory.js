@@ -160,14 +160,6 @@ const Factory = {
             return cache.get(token);
         }
         return null;
-    },
-    // 封装返回客户端的数据
-    responseSuccess: (data, msg='success') => {
-        return { code:0, msg, data }
-    },
-    // 封装返回客户端的错误数据
-    responseError: (msg) => {
-        return { code:-1, msg }
     }
 };
 

@@ -18,6 +18,9 @@ global.cacheDeadline = 60*24*3; // 有效期3天，单位s
 // 初始化数据库
 SqlExt.init();
 
+// 端口号
+const port = 8100;
+
 const app = express();
 
 // 日志配置 - 自定义
@@ -37,7 +40,14 @@ app.use(morgan('myLog', {
     stream: accessLogStream,
     skip: (req, res) => {
         // 过滤 不记录规则
-        return req.url.indexOf('/web/') !== -1 || req.url.indexOf('/apidoc/') !== -1;
+        let fl = ['/web/', '/apidoc/'];
+        for(let a of fl) {
+            if(req.url.indexOf(a) !== -1) {
+                return true;
+            }
+        }
+        return false;
+        // return req.url.indexOf('/web/') !== -1 || req.url.indexOf('/apidoc/') !== -1;
     }
 }));
 
@@ -76,8 +86,8 @@ app.get("/", function(req, res) {
     res.end('hello world');
 });
 
-app.listen(8100, () => {
-    console.log('build end, to open: http://localhost:8100');
+app.listen(port, () => {
+    console.log('build end, to open: http://localhost:' + port);
 });
 
 module.exports = app;
