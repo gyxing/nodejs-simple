@@ -18,7 +18,7 @@ simn init <ProjectName>
 * apidoc：自动生成接口api文档
 
 
-#### 项目开始，需手动创建数据库：
+#### 项目开始，自动创建数据库：
 ```base
 # ./src/base/config.json
 
