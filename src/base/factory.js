@@ -1,8 +1,6 @@
-const sqlext = require('./sqlext');
+const Sqlext = require('./sqlext');
 const utils = require('../utils');
 const config = require('./config.json');
-
-const Sqlext = new sqlext();
 
 // 组装sql的where条件语句
 const createWhereSql = (query) => {
