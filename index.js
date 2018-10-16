@@ -5,18 +5,13 @@ const morgan = require('morgan');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const NodeCache = require('node-cache');
-const sqlext = require('./src/base/sqlext');
 const cache = new NodeCache();
-const SqlExt = new sqlext();
 
 // 解决response.send的JSON.stringify时对Date数据的处理
 Date.prototype.toJSON = function () { return this.getTime() };
 
 global.cache = cache;   // 缓存对象
 global.cacheDeadline = 60*24*3; // 有效期3天，单位s
-
-// 初始化数据库
-SqlExt.init();
 
 // 端口号
 const port = 8100;
