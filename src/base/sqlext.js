@@ -5,23 +5,36 @@ const config = require('./config.json');
 /**
  * 数据库设置、初始化
  */
-class SqlExt {
+const SqlExt = new class {
 
-    constructor(props) {
-        // 初始配置数据库连接池
-        this.mysqlPool = mysql.createPool({
+    constructor() {
+        // 尝试连接，判断添加数据库
+        let params = {
             host     : config.mysql.host,
             user     : config.mysql.user,
             password : config.mysql.password,
-            port: '3306',
-            database: config.mysql.database,
-            multipleStatements: true,
-            stringifyObjects: true
-        })
+            port: '3306'
+        };
+        let pool = mysql.createPool(params);
+        pool.getConnection((err, connection) => {
+            connection.query( `CREATE DATABASE IF NOT EXISTS ${config.mysql.database} DEFAULT CHARSET utf8 COLLATE utf8_general_ci;`, (err, rows) => {
+                connection.release();
+                connection.destroy();
+                // 初始配置数据库连接池
+                this.mysqlPool = mysql.createPool({
+                    ...params,
+                    database: config.mysql.database,
+                    multipleStatements: true,
+                    stringifyObjects: true
+                });
+                // 建表
+                this.createTables();
+            });
+        });
     }
 
-    init() {
-        // 建表
+    // 建表
+    createTables() {
         Object.keys(tables).map( key => {
             let arr = tables[key], sql, fields;
             fields = Object.keys(arr).map( field => `${field} ${arr[field]}`);
@@ -72,6 +85,6 @@ class SqlExt {
             }
         });
     }
-}
+};
 
 module.exports = SqlExt;
