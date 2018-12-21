@@ -2,15 +2,6 @@
 
 技术架构： nodejs + express + mysql
 
-#### 安装
-
-* 已加入npm脚手架，用npm安装
-```base
-npm i -g simn-cli
-
-simn init <ProjectName>
-```
-
 
 #### 辅助工具：
 
